@@ -10,10 +10,19 @@ $query= "SELECT * FROM users WHERE username = '$username'";
 $result = mysqli_query($conn, $query);
 $user = mysqli_fetch_assoc($result);
 
-if($user && password_verify($password, $user['password'])) {
+#Versi password di hash
+if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user'] = $user['username'];
     header("Location: dashboard.php");
 } else {
     echo "Login gagal. Username atau password salah.";
 }
+
+#Versi password ga di hash
+// if ($user && $password === $user['password']) {
+//     $_SESSION['user'] = $user['username'];
+//     header("Location: dashboard.php");
+// } else {
+//     echo "Login gagal. Username atau password salah.";
+// }
 ?>
